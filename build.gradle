@@ -28,16 +28,24 @@ task clean(type: Delete) {
 }
 
 ext {
-    // Project
+    //Project
     targetSdkVersion = 28
     minSdkVersion = 28
     compileSdkVersion = targetSdkVersion
     libVersionCode = 1
     libVersionName = '1.0.0'
-    libPomUrl = 'https://github.com/nisrulz/validatetor'
-    libGithubRepo = 'nisrulz/validatetor'
-    libModuleName = 'validatetor'
-    libModuleDesc = 'Android library for fast and simple string validation.'
-    libBintrayName = 'validatetor'
+    libPomUrl = 'https://github.com/pcmazz/Promise'
+    libGithubRepo = 'pcmazz/Promise'
+    libModuleName = 'promiselibrary'
+    libModuleDesc = 'Android library to create Javascript like promises'
+    libBintrayName = 'promise'
 
+    //Dependencies
+    app_compat_version = '1.1.0-alpha04'
+    androidx_core_version = '1.1.0-alpha05'
+    constraint_layout_version = '1.1.3'
+    coroutines_version = '1.1.0'
+    junit_version = '4.12'
+    runner_version = '1.1.0-alpha4'
+    espress_core_version = '3.1.0-alpha4'
 }
