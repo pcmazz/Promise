@@ -36,7 +36,7 @@ ext {
     libPomUrl = 'https://github.com/pcmazz/promise'
     libGithubRepo = 'pcmazz/promise'
     libModuleName = 'promiselibrary'
-    libModuleDesc = 'Android library to create Javascript like promises'
+    libModuleDesc = 'Android library to create Javascript like promises stuff'
     libBintrayName = 'promise'
 
     //Dependencies
