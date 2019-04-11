@@ -6,19 +6,22 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
 
     }
 }
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -32,12 +35,8 @@ ext {
     minSdkVersion = 28
     compileSdkVersion = targetSdkVersion
     libVersionCode = 1
-    libVersionName = '1.0.2'
-    libPomUrl = 'https://github.com/pcmazz/promise'
-    libGithubRepo = 'pcmazz/promise'
-    libModuleName = 'promiselibrary'
-    libModuleDesc = 'Android library to create Javascript like promises stuff'
-    libBintrayName = 'promise'
+    libVersionName = '1.0.3'
+
 
     //Dependencies
     app_compat_version = '1.1.0-alpha04'
