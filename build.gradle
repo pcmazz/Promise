@@ -32,9 +32,9 @@ ext {
     minSdkVersion = 28
     compileSdkVersion = targetSdkVersion
     libVersionCode = 1
-    libVersionName = '1.0.0'
-    libPomUrl = 'https://github.com/pcmazz/Promise'
-    libGithubRepo = 'pcmazz/Promise'
+    libVersionName = '1.0.1'
+    libPomUrl = 'https://github.com/pcmazz/promise'
+    libGithubRepo = 'pcmazz/promise'
     libModuleName = 'promiselibrary'
     libModuleDesc = 'Android library to create Javascript like promises'
     libBintrayName = 'promise'
