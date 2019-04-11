@@ -32,7 +32,7 @@ ext {
     minSdkVersion = 28
     compileSdkVersion = targetSdkVersion
     libVersionCode = 1
-    libVersionName = '1.0.1'
+    libVersionName = '1.0.2'
     libPomUrl = 'https://github.com/pcmazz/promise'
     libGithubRepo = 'pcmazz/promise'
     libModuleName = 'promiselibrary'
