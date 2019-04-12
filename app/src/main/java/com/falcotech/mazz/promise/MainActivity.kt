@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private fun test(){
         btnTest.setOnClickListener {
             Log.d("DEBUG", "Clicky")
-            val uiPromise = PromiseUtils.ofUi{
+            /*val uiPromise = PromiseUtils.ofUi{
                 debug()
                 tvHelloWorld.text = "COCKS"
             }
@@ -34,6 +34,17 @@ class MainActivity : AppCompatActivity() {
             }.then {
                 Log.d("DEBUG", "final text = $it")
                 uiPromise
+            })*/
+            val uiPromise = PromiseUtils.ofUi{
+                debug()
+                tvHelloWorld.text = "COCKS"
+            }
+            PromiseUtils.test(uiPromise.then {
+                PromiseUtils.ofBg {
+                    "TITS"
+                }
+            }.then{
+                "NUTTER_BUT$it"
             })
         }
     }

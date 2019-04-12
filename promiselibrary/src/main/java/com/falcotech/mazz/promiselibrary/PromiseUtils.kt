@@ -19,6 +19,4 @@ object PromiseUtils {
     fun <T> ofUi(block: suspend CoroutineScope.() -> T): Promise<T> = CoroutineScope(Dispatchers.Main).async {
         block.invoke(this)
     }
-
-
 }
