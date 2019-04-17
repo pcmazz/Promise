@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 
 interface PromiseManager {
 
-    suspend fun <T> async(promise: Promise<T>): Promise<T>
+    fun <T> async(promise: Promise<T>): Promise<T>
 
     suspend fun <T> asyncAwait(promise: Promise<T>): T
 
