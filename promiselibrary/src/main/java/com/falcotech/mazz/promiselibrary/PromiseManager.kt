@@ -8,7 +8,11 @@ interface PromiseManager {
 
     suspend fun <T> asyncAwait(promise: Promise<T>): T
 
+    suspend fun executeAll(): Any?
+
     fun cancelAllPromises()
 
     fun cleanUp()
+
+    fun setDebug(block: (String)->Unit)
 }

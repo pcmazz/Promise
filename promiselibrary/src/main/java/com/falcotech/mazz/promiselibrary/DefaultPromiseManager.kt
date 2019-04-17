@@ -6,6 +6,7 @@ import androidx.annotation.CallSuper
 open class DefaultPromiseManager : PromiseManager{
 
     private val coldList: ArrayList<Promise<*>> = arrayListOf()
+    private var debug = { _: String-> }
 
     @CallSuper
     @Synchronized
@@ -23,6 +24,12 @@ open class DefaultPromiseManager : PromiseManager{
 
     @CallSuper
     @Synchronized
+    override suspend fun executeAll(): Any? {
+        return recursList(null)
+    }
+
+    @CallSuper
+    @Synchronized
     override fun cancelAllPromises() {
         if(coldList.isNotEmpty()){
             coldList.forEach {
@@ -35,5 +42,17 @@ open class DefaultPromiseManager : PromiseManager{
     @Synchronized
     override fun cleanUp() {
         cancelAllPromises()
+    }
+
+    override fun setDebug(block: (String) -> Unit) {
+        debug = block
+    }
+
+    private suspend fun recursList(lastRes: Any?): Any?{
+        debug(lastRes.toString())
+        if(coldList.isEmpty()){
+            return lastRes
+        }
+        return recursList(coldList.last().await())
     }
 }
