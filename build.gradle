@@ -35,7 +35,7 @@ ext {
     minSdkVersion = 28
     compileSdkVersion = targetSdkVersion
     libVersionCode = 1
-    libVersionName = '1.0.7'
+    libVersionName = '1.0.8'
 
 
     //Dependencies

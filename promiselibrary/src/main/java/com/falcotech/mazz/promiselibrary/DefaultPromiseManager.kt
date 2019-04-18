@@ -32,8 +32,9 @@ open class DefaultPromiseManager : PromiseManager{
     @Synchronized
     override fun cancelAllPromises() {
         if(coldList.isNotEmpty()){
-            coldList.forEach {
-                it.cancel()
+            (coldList.lastIndex downTo 0).forEach {
+                val def = coldList[it]
+                def.cancel()
             }
         }
     }
