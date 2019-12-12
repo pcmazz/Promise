@@ -4,7 +4,6 @@ import android.util.Log
 import kotlinx.coroutines.*
 
 object PromiseUtils {
-    //newSingleThreadContext("Walrus")
     fun test(promise: Promise<*>){
         CoroutineScope(Dispatchers.Default).launch {
             val result = promise.await()
@@ -20,7 +19,7 @@ object PromiseUtils {
         block.invoke(this)
     }
 
-    fun <T> ofContext(block: suspend CoroutineScope.() -> T, context: CoroutineScope): Promise<T> = context.async {
+    fun <T> ofContext(block: suspend CoroutineScope.() -> T, context: ExecutorCoroutineDispatcher): Promise<T> = CoroutineScope(context).async {
         block.invoke(this)
     }
 }
