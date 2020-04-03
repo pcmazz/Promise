@@ -11,6 +11,4 @@ constructor(promiseManager: PromiseManager) : ViewModel(), CoroutineScope, Promi
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = job
-
-
 }

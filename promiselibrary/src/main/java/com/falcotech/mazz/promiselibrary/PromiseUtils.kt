@@ -19,7 +19,7 @@ object PromiseUtils {
         block.invoke(this)
     }
 
-    fun <T> ofContext(block: suspend CoroutineScope.() -> T, context: ExecutorCoroutineDispatcher): Promise<T> = CoroutineScope(context).async {
-        block.invoke(this)
+    fun <T> ofScope(block: suspend () -> T, coroutineScope: CoroutineScope): Promise<T> = coroutineScope.async {
+        block.invoke()
     }
 }

@@ -6,7 +6,10 @@ import androidx.annotation.CallSuper
 open class DefaultPromiseManager : PromiseManager{
 
     private val coldList: ArrayList<Promise<*>> = arrayListOf()
+    private var singleRunner = SingleRunner()
+    private val controlledRunnerMap: MutableMap<String, ControlledRunner<*>> = mutableMapOf()
     private var debug = { _: String-> }
+
 
     @CallSuper
     @Synchronized
@@ -33,8 +36,9 @@ open class DefaultPromiseManager : PromiseManager{
     override fun cancelAllPromises() {
         if(coldList.isNotEmpty()){
             (coldList.lastIndex downTo 0).forEach {
-                val def = coldList[it]
-                def.cancel()
+                coldList[it].cancel()
+            }.let {
+                coldList.clear()
             }
         }
     }
@@ -43,6 +47,36 @@ open class DefaultPromiseManager : PromiseManager{
     @Synchronized
     override fun cleanUp() {
         cancelAllPromises()
+        singleRunner = SingleRunner()
+        if(controlledRunnerMap.isNotEmpty()){
+            controlledRunnerMap.forEach {
+                it.value.cancel()
+            }
+            controlledRunnerMap.clear()
+        }
+    }
+
+    override suspend fun <T> launchSingleQueue(block: suspend () -> T): T {
+        return singleRunner.afterPrevious(block)
+    }
+
+    override suspend fun <T> cancelPreviousThenLaunch(
+        runnerName: String,
+        block: suspend () -> T): T {
+        if(!controlledRunnerMap.containsKey(runnerName)){
+            controlledRunnerMap[runnerName] = ControlledRunner<T>()
+        }
+        return (controlledRunnerMap[runnerName]!! as ControlledRunner<T>).cancelPreviousThenRun(block)
+    }
+
+    override suspend fun <T> finishPreviousThenLaunch(
+        runnerName: String,
+        block: suspend () -> T
+    ): T {
+        if(!controlledRunnerMap.containsKey(runnerName)){
+            controlledRunnerMap[runnerName] = ControlledRunner<T>()
+        }
+        return (controlledRunnerMap[runnerName]!! as ControlledRunner<T>).joinPreviousOrRun(block)
     }
 
     override fun setDebug(block: (String) -> Unit) {

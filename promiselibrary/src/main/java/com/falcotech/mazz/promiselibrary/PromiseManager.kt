@@ -15,4 +15,10 @@ interface PromiseManager {
     fun cleanUp()
 
     fun setDebug(block: (String)->Unit)
+
+    suspend fun <T> launchSingleQueue(block: suspend () -> T): T
+
+    suspend fun <T> cancelPreviousThenLaunch(runnerName: String, block: suspend() -> T): T
+
+    suspend fun <T> finishPreviousThenLaunch(runnerName: String, block: suspend() -> T): T
 }
