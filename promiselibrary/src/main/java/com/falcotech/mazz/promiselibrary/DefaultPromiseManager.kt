@@ -47,7 +47,6 @@ open class DefaultPromiseManager : PromiseManager{
     @Synchronized
     override fun cleanUp() {
         cancelAllPromises()
-        singleRunner = SingleRunner()
         if(controlledRunnerMap.isNotEmpty()){
             controlledRunnerMap.forEach {
                 it.value.cancel()
