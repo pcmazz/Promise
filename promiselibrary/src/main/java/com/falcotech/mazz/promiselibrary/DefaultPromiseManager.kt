@@ -60,16 +60,17 @@ open class DefaultPromiseManager : PromiseManager{
         return singleRunner.afterPrevious(block)
     }
 
-    override suspend fun <T> cancelPreviousThenLaunch(
+    override suspend fun <T> cancelThenLaunchControlled(
         runnerName: String,
-        block: suspend () -> T): T {
+        block: suspend () -> T
+    ): T {
         if(!controlledRunnerMap.containsKey(runnerName)){
             controlledRunnerMap[runnerName] = ControlledRunner<T>()
         }
         return (controlledRunnerMap[runnerName]!! as ControlledRunner<T>).cancelPreviousThenRun(block)
     }
 
-    override suspend fun <T> finishPreviousThenLaunch(
+    override suspend fun <T> finishOrLaunchControlled(
         runnerName: String,
         block: suspend () -> T
     ): T {

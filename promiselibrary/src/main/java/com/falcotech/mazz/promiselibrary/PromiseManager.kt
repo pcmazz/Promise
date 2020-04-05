@@ -18,7 +18,7 @@ interface PromiseManager {
 
     suspend fun <T> launchSingleQueue(block: suspend () -> T): T
 
-    suspend fun <T> cancelPreviousThenLaunch(runnerName: String, block: suspend() -> T): T
+    suspend fun <T> cancelThenLaunchControlled(runnerName: String, block: suspend() -> T): T
 
-    suspend fun <T> finishPreviousThenLaunch(runnerName: String, block: suspend() -> T): T
+    suspend fun <T> finishOrLaunchControlled(runnerName: String, block: suspend () -> T): T
 }
